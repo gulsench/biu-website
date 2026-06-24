@@ -9,15 +9,15 @@ export function Platform() {
         <SectionHeader
           label="The platform"
           title={[
-            { text: "One platform. One " },
+            { text: "One platform. One" },
             { text: "score", accent: true },
             { text: "." },
           ]}
-          sub="Every module feeds a single Market Momentum Score — so the whole team reads from one source of truth."
+          sub="Every module feeds a single Market Momentum Score, so the whole team reads from one source of truth."
           className="mb-14"
         />
 
-        <Reveal stagger className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal stagger className="grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {platform.map((p, i) => (
             <div
               key={p.title}

@@ -9,7 +9,7 @@ export function Comparison() {
         <SectionHeader
           label="Why BIU"
           title={[
-            { text: "Stop piecing it " },
+            { text: "Stop piecing it" },
             { text: "together", accent: true },
             { text: "." },
           ]}
@@ -17,7 +17,7 @@ export function Comparison() {
           className="mb-14"
         />
 
-        <Reveal className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-border">
+        <Reveal className="mx-auto max-w-3xl overflow-hidden border border-border">
           <div className="grid grid-cols-2 border-b border-border bg-surfacealt">
             <div className="px-5 py-4 text-[13px] font-semibold text-muted sm:px-7">
               {comparison.withoutLabel}
@@ -33,7 +33,7 @@ export function Comparison() {
             >
               <div className="flex items-start gap-2.5 px-5 py-4 text-[13.5px] text-mid sm:px-7">
                 <span aria-hidden className="mt-0.5 text-muted">
-                  —
+                  ×
                 </span>
                 {row.without}
               </div>

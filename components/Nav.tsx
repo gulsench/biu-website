@@ -1,30 +1,110 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { navLinks, navCtas } from "@/lib/content";
+import { isNavDropdown, navCtas, navLinks } from "@/lib/content";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/cn";
 
+function Chevron({ open }: { open?: boolean }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      aria-hidden
+      className={cn("transition-transform", open && "rotate-180")}
+    >
+      <path
+        d="M2.5 4.5 6 8l3.5-3.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MenuIcon({ open }: { open: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden className="text-ink">
+      {open ? (
+        <path
+          d="M6 6l12 12M18 6 6 18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      ) : (
+        <path
+          d="M4 7h16M4 12h16M4 17h16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      )}
+    </svg>
+  );
+}
+
 export function Nav() {
-  const [open, setOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const reduce = useReducedMotion();
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        setMobileResourcesOpen(false);
+      }
+    }
+
+    function onResize() {
+      if (window.innerWidth >= 1024) {
+        setMobileOpen(false);
+        setMobileResourcesOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    window.addEventListener("resize", onResize);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [mobileOpen]);
+
+  function closeMobile() {
+    setMobileOpen(false);
+    setMobileResourcesOpen(false);
+    setResourcesOpen(false);
+  }
+
   return (
-    <header className="sticky top-0 z-50 border-b border-[rgba(255,255,255,0.08)] bg-band/90 backdrop-blur-xl supports-[backdrop-filter]:bg-band/75">
+    <header
+      data-mobile-nav
+      className="border-b border-border bg-white"
+    >
       <nav
         aria-label="Primary"
-        className="mx-auto flex h-16 max-w-container items-center justify-between px-6"
+        className="mx-auto flex h-16 max-w-container items-center justify-between gap-3 px-4 sm:px-6"
       >
         <a
-          href="#"
+          href="/"
           aria-label="BIU home"
-          className="flex items-center gap-2 text-[17px] font-extrabold tracking-tight text-ink"
+          className="flex shrink-0 items-center gap-2 text-[17px] font-extrabold tracking-tight text-ink"
         >
-          {/* TODO: wire real destination before launch */}
           <Image
-            src="/logo-white.png"
+            src="/logo.png"
             alt="BIU logo"
             width={200}
             height={191}
@@ -33,60 +113,152 @@ export function Nav() {
           />
         </a>
 
-        <ul className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                className="text-[14px] font-medium text-mid transition-colors hover:text-ink"
+        <ul className="hidden items-center justify-center gap-7 lg:flex">
+          {navLinks.map((item) =>
+            isNavDropdown(item) ? (
+              <li
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => setResourcesOpen(true)}
+                onMouseLeave={() => setResourcesOpen(false)}
               >
-                {link.label}
-              </a>
-            </li>
-          ))}
+                <button
+                  type="button"
+                  aria-expanded={resourcesOpen}
+                  aria-haspopup="true"
+                  onClick={() => setResourcesOpen((v) => !v)}
+                  className="inline-flex items-center gap-1 text-[14px] font-medium text-mid transition-colors hover:text-ink"
+                >
+                  {item.label}
+                  <Chevron open={resourcesOpen} />
+                </button>
+                <AnimatePresence>
+                  {resourcesOpen && (
+                    <motion.div
+                      initial={reduce ? { opacity: 1 } : { opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={reduce ? { opacity: 0 } : { opacity: 0, y: 4 }}
+                      transition={{ duration: reduce ? 0 : 0.15 }}
+                      className="absolute left-0 top-full z-50 pt-2"
+                    >
+                      <ul
+                        role="menu"
+                        className="min-w-[200px] overflow-hidden border border-border bg-card py-2 shadow-lift"
+                      >
+                        {item.children.map((child) => (
+                          <li key={child.label} role="none">
+                            <a
+                              role="menuitem"
+                              href={child.href}
+                              className="block px-4 py-2.5 text-[14px] font-medium text-mid transition-colors hover:bg-surfacealt hover:text-ink"
+                            >
+                              {child.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
+            ) : (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  className="text-[14px] font-medium text-mid transition-colors hover:text-ink"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )}
         </ul>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Button variant="outline">{navCtas.secondary}</Button>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Button variant="module" className="hidden sm:inline-flex">
+            {navCtas.primary}
+          </Button>
+          <button
+            type="button"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-menu"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="inline-flex h-10 w-10 items-center justify-center border border-border bg-card lg:hidden"
+          >
+            <MenuIcon open={mobileOpen} />
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="flex h-9 w-9 items-center justify-center md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <div className="flex flex-col gap-[5px]">
-            <span className={cn("block h-0.5 w-5 bg-ink transition-transform", open && "translate-y-[7px] rotate-45")} />
-            <span className={cn("block h-0.5 w-5 bg-ink transition-opacity", open && "opacity-0")} />
-            <span className={cn("block h-0.5 w-5 bg-ink transition-transform", open && "-translate-y-[7px] -rotate-45")} />
-          </div>
-        </button>
       </nav>
 
       <AnimatePresence>
-        {open && (
+        {mobileOpen && (
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            id="mobile-nav-menu"
+            key="mobile-nav-menu"
+            role="navigation"
+            aria-label="Mobile"
+            initial={reduce ? undefined : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-border bg-band md:hidden"
+            exit={reduce ? undefined : { opacity: 0, height: 0 }}
+            transition={{ duration: reduce ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-t border-border bg-white lg:hidden"
           >
-            <div className="space-y-1 px-6 py-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2 text-[15px] font-medium text-ink"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="pt-3">
-                <Button variant="outline" size="md" className="w-full">
-                  {navCtas.secondary}
+            <div className="mx-auto max-w-container px-4 py-4 sm:px-6">
+              <ul className="space-y-1">
+                {navLinks.map((item) =>
+                  isNavDropdown(item) ? (
+                    <li key={item.label}>
+                      <button
+                        type="button"
+                        aria-expanded={mobileResourcesOpen}
+                        onClick={() => setMobileResourcesOpen((v) => !v)}
+                        className="flex w-full items-center justify-between rounded-sm px-3 py-3 text-left text-[15px] font-medium text-ink transition-colors hover:text-brand-700"
+                      >
+                        {item.label}
+                        <Chevron open={mobileResourcesOpen} />
+                      </button>
+                      <AnimatePresence>
+                        {mobileResourcesOpen && (
+                          <motion.ul
+                            initial={reduce ? undefined : { opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={reduce ? undefined : { opacity: 0, height: 0 }}
+                            transition={{ duration: reduce ? 0 : 0.15 }}
+                            className="mb-2 ml-3 overflow-hidden border-l border-border pl-3"
+                          >
+                            {item.children.map((child) => (
+                              <li key={child.label}>
+                                <a
+                                  href={child.href}
+                                  onClick={closeMobile}
+                                  className="block py-2.5 text-[14px] font-medium text-mid transition-colors hover:text-ink"
+                                >
+                                  {child.label}
+                                </a>
+                              </li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </li>
+                  ) : (
+                    <li key={item.label}>
+                      <a
+                        href={item.href}
+                        onClick={closeMobile}
+                        className="block rounded-sm px-3 py-3 text-[15px] font-medium text-ink transition-colors hover:text-brand-700"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ),
+                )}
+              </ul>
+
+              <div className="mt-4 border-t border-border pt-4 sm:hidden">
+                <Button variant="module" className="w-full" onClick={closeMobile}>
+                  {navCtas.primary}
                 </Button>
               </div>
             </div>

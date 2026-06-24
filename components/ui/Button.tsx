@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "audit" | "outline" | "ghost";
+type Variant = "primary" | "audit" | "outline" | "ghost" | "module";
 type Size = "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,12 +16,11 @@ const sizes: Record<Size, string> = {
 };
 
 const primaryStyles = cn(
-  "inline-flex items-center justify-center gap-2 rounded-xl border border-green-text/30 font-semibold",
-  "bg-green-text text-band",
-  "shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_14px_rgba(74,222,128,0.25)]",
-  "transition-[background-color,box-shadow,transform] duration-150",
-  "hover:bg-[#5ef59a] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_6px_18px_rgba(74,222,128,0.32)]",
-  "active:translate-y-px active:bg-[#3dd070]",
+  "inline-flex items-center justify-center gap-2 border border-brand-600/20 font-semibold",
+  "bg-brand-600 text-white",
+  "transition-[background-color,transform] duration-150",
+  "hover:bg-brand-700",
+  "active:translate-y-px",
 );
 
 export function Button({
@@ -32,7 +31,46 @@ export function Button({
   type = "button",
   ...props
 }: ButtonProps) {
-  if (variant === "primary" || variant === "audit") {
+  if (variant === "audit") {
+    return (
+      <button
+        type={type}
+        className={cn(
+          "inline-flex items-center justify-center gap-2 border border-white/20 font-semibold",
+          "bg-white text-brand-700",
+          "transition-[background-color,transform] duration-150",
+          "hover:bg-brand-glow hover:text-brand-700",
+          "active:translate-y-px",
+          "disabled:cursor-not-allowed disabled:opacity-60",
+          sizes[size],
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  if (variant === "module") {
+    return (
+      <button
+        type={type}
+        className={cn(
+          "module-cta inline-flex items-center justify-center gap-2 font-semibold",
+          "active:translate-y-px",
+          "disabled:cursor-not-allowed disabled:opacity-60",
+          sizes[size],
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  if (variant === "primary") {
     return (
       <button
         type={type}
@@ -54,9 +92,8 @@ export function Button({
       <button
         type={type}
         className={cn(
-          "inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/[0.05] font-semibold text-ink",
-          "shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]",
-          "transition-all duration-150 hover:border-white/30 hover:bg-white/[0.09] active:translate-y-px",
+          "inline-flex items-center justify-center border border-border bg-white font-semibold text-ink",
+          "transition-all duration-150 hover:border-brand-600/30 hover:bg-surfacealt active:translate-y-px",
           "disabled:cursor-not-allowed disabled:opacity-60",
           sizes[size],
           className,

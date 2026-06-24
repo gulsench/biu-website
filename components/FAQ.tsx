@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { faq } from "@/lib/content";
 import { SectionHeader } from "./ui/SectionHeader";
 import { Reveal } from "./ui/Reveal";
+import { SectionBackground } from "./ui/SectionBackground";
 import { cn } from "@/lib/cn";
 
 export function FAQ() {
@@ -12,15 +13,16 @@ export function FAQ() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="faq" className="border-b border-border">
-      <div className="mx-auto max-w-container px-6 py-24">
+    <section id="faq" className="relative overflow-hidden border-b border-border bg-band">
+      <SectionBackground tone="band" subtle />
+      <div className="section-wrap relative z-10">
         <SectionHeader
           label="FAQ"
           title="Questions, answered."
           className="mb-14"
         />
 
-        <Reveal className="mx-auto max-w-3xl divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+        <Reveal className="mx-auto max-w-3xl divide-y divide-border overflow-hidden border border-border bg-card">
           {faq.map((item, i) => {
             const expanded = open === i;
             return (
@@ -29,14 +31,14 @@ export function FAQ() {
                   type="button"
                   aria-expanded={expanded}
                   onClick={() => setOpen(expanded ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left sm:gap-4 sm:px-6 sm:py-5"
                 >
-                  <span className="text-[15px] font-semibold text-ink">
+                  <span className="text-left text-[14px] font-semibold leading-snug text-ink sm:text-[15px]">
                     {item.q}
                   </span>
                   <span
                     className={cn(
-                      "flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border text-mid transition-transform",
+                      "flex h-6 w-6 flex-shrink-0 items-center justify-center border border-border text-mid transition-transform",
                       expanded && "rotate-45"
                     )}
                     aria-hidden
@@ -53,7 +55,7 @@ export function FAQ() {
                       transition={{ duration: reduce ? 0 : 0.28, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="px-6 pb-5 text-[14px] leading-relaxed text-mid">
+                      <p className="px-4 pb-4 text-[13px] leading-relaxed text-mid sm:px-6 sm:pb-5 sm:text-[14px]">
                         {item.a}
                       </p>
                     </motion.div>

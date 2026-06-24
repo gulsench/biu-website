@@ -11,14 +11,14 @@ export function FeatureSection({
   data: FeatureData;
   flip?: boolean;
 }) {
-  const isCompetitive = data.id === "competitive";
+  const isAeo = data.id === "aeo";
 
   return (
     <div
       id={data.id}
       className={cn(
         "scroll-mt-16 border-b border-border",
-        isCompetitive
+        isAeo
           ? "bg-brand-accent/[0.04]"
           : undefined,
       )}
@@ -29,13 +29,13 @@ export function FeatureSection({
           <RevealItem>
             <div className="mb-5 flex items-center gap-3">
               <Eyebrow>{data.eyebrow}</Eyebrow>
-              {isCompetitive && (
-                <span className="rounded-full border border-brand-accent/30 bg-brand-accent/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-green-text">
+              {isAeo && (
+                <span className="border border-brand-accent/30 bg-brand-accent/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-green-text">
                   Ships first
                 </span>
               )}
               {data.status === "Coming soon" && (
-                <span className="rounded-full border border-border bg-card px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-mid">
+                <span className="border border-border bg-card px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-mid">
                   {data.status}
                 </span>
               )}
@@ -88,11 +88,11 @@ export function FeatureSection({
           <div
             className={cn(
               "relative",
-              isCompetitive &&
-                "before:pointer-events-none before:absolute before:-inset-3 before:rounded-[20px] before:bg-brand-accent/[0.07] before:blur-xl",
+              isAeo &&
+                "before:pointer-events-none before:absolute before:-inset-3 before:bg-brand-accent/[0.07] before:blur-xl",
             )}
           >
-            <FeatureMock variant={data.mock} highlight={isCompetitive} />
+            <FeatureMock variant={data.mock} highlight={isAeo} />
           </div>
         </Reveal>
       </div>

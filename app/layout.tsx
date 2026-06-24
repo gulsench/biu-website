@@ -17,7 +17,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BIU — AI Growth Intelligence Platform",
+  title: "BIU | AI Growth Intelligence Platform",
   description:
     "BIU measures how your brand shows up across AI answer engines, finds the one root cause behind the gap, and hands your team the next move.",
   icons: {
@@ -27,7 +27,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#080a09",
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#fafafa",
 };
 
 export default function RootLayout({
@@ -37,7 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`}>
-      <body className="min-h-screen bg-band antialiased">
+      <body className="min-h-screen overflow-x-hidden bg-surface antialiased">
         {children}
       </body>
     </html>

@@ -2,35 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Brand green — tuned for dark canvas */
-  --brand-900: #a7f3d0;
-  --brand-700: #34d27b;
-  --brand-600: #36bd83;
-  --brand-500: #4ade80;
-  --brand-400: #6ee7a8;
-  --brand-glow: #0f1613;
-  --brand-accent: #36bd83;
-  --color-green-text: #4ade80;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-radius: 0;
+  }
+}
 
-  /* Neutrals — footer-deep canvas */
-  --ink: #ffffff;
-  --mid: rgba(255, 255, 255, 0.72);
-  --muted: rgba(255, 255, 255, 0.45);
-  --border: rgba(255, 255, 255, 0.1);
-  --surface: #080a09;
-  --surface-alt: #0e100f;
-  --card: #121412;
-  --card-inner: #1a1c1a;
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-highlight-border: rgba(54, 189, 131, 0.45);
-  --band: #080a09;
+@layer utilities {
+  [class*="rounded"] {
+    border-radius: 0 !important;
+  }
+}
+
+:root {
+  --site-nav-height: 4rem;
+  --site-chrome-height: var(--site-nav-height);
+  /* Brand green — tuned for light canvas.
+   *-rgb channel vars power Tailwind alpha modifiers (bg-brand-600/40);
+   hex vars remain for direct var() usage in inline styles/SVG. */
+  --brand-900-rgb: 220 252 231;
+  --brand-700-rgb: 21 128 61;
+  --brand-600-rgb: 22 163 74;
+  --brand-500-rgb: 34 197 94;
+  --brand-400-rgb: 74 222 128;
+  --brand-accent-rgb: 22 163 74;
+
+  --brand-900: #dcfce7;
+  --brand-700: #15803d;
+  --brand-600: #16a34a;
+  --brand-500: #22c55e;
+  --brand-400: #4ade80;
+  --brand-glow: #f0fdf4;
+  --brand-accent: #16a34a;
+  --color-green-text: #16a34a;
+
+  /* Neutrals — warm light canvas */
+  --ink: #1a1a1a;
+  --mid: #525252;
+  --muted: #737373;
+  --border: #e5e5e5;
+  --surface: #fafafa;
+  --surface-alt: #f5f5f5;
+  --card: #ffffff;
+  --card-inner: #f9fafb;
+  --card-border: #e5e5e5;
+  --card-highlight-border: rgba(22, 163, 74, 0.35);
+  --band: #ffffff;
+
+  /* Dark footer — matches Request Demo / module-cta button */
+  --footer-bg: #2d2d2d;
+  --footer-bg-elevated: #363636;
+  --footer-border: rgba(255, 255, 255, 0.12);
+  --footer-text: rgba(255, 255, 255, 0.78);
+  --footer-muted: rgba(255, 255, 255, 0.52);
   --white: #ffffff;
 
   /* Signal colors */
-  --up: #4ade80;
-  --down: #36bd83;
-  --warn: #6ee7a8;
+  --up: #16a34a;
+  --down: #15803d;
+  --warn: #22c55e;
 }
 
 * {
@@ -41,11 +73,12 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--band);
+  background: var(--surface);
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -59,9 +92,9 @@ a {
 }
 
 :where(a, button, input, [tabindex]):focus-visible {
-  outline: 2px solid var(--brand-500);
+  outline: 2px solid var(--brand-600);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* Type scale — large, tight, heavy headings on a calm canvas. */
@@ -110,6 +143,203 @@ a {
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Logo marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+/* Soft animated section backgrounds */
+.section-bg-orb {
+  position: absolute;
+  width: min(56vw, 540px);
+  height: min(56vw, 540px);
+  animation: section-bg-drift 30s ease-in-out infinite;
+  will-change: transform;
+}
+
+.section-bg-orb-a {
+  top: -28%;
+  right: -14%;
+}
+
+.section-bg-orb-b {
+  bottom: -22%;
+  left: -12%;
+  width: min(46vw, 460px);
+  height: min(46vw, 460px);
+  animation-delay: -15s;
+  animation-direction: reverse;
+}
+
+.section-bg-orb--subtle {
+  opacity: 0.75;
+  animation-duration: 36s;
+}
+
+.section-bg-wash {
+  position: absolute;
+  inset: 0;
+  animation: section-bg-breathe 22s ease-in-out infinite;
+}
+
+@keyframes section-bg-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(2.5%, 1.5%, 0) scale(1.05);
+  }
+  66% {
+    transform: translate3d(-1.5%, 2.5%, 0) scale(0.97);
+  }
+}
+
+@keyframes section-bg-breathe {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Shared section spacing */
+.site-header-spacer {
+  height: var(--site-chrome-height);
+}
+
+.section-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section-wrap {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-wrap {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.module-preview-panel {
+  background: #d8ebe3;
+  border-radius: 0;
+}
+.module-nav-item {
+  border-radius: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.module-nav-item[data-active="true"] {
+  background: #e8f4ef;
+}
+.module-card {
+  background: #fff;
+  border-radius: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+.module-cta {
+  border-radius: 0;
+  background: #2d2d2d;
+  color: #fff;
+  transition: background-color 0.15s ease;
+}
+.module-cta:hover {
+  background: #1a1a1a;
+}
+.module-chip {
+  border-radius: 0;
+}
+.module-pill {
+  border-radius: 0;
+}
+
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-color: var(--footer-border);
+}
+
+.site-footer a {
+  transition: color 0.15s ease;
+}
+
+.site-footer a:hover {
+  color: var(--brand-400);
+}
+
+.site-footer .footer-newsletter {
+  background: var(--footer-bg-elevated);
+  border-color: var(--footer-border);
+}
+
+.site-footer .footer-input {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--footer-border);
+  color: #fff;
+}
+
+.site-footer .footer-input::placeholder {
+  color: var(--footer-muted);
+}
+
+.site-footer .footer-input:focus {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.site-footer .footer-social {
+  border-color: var(--footer-border);
+  color: var(--footer-muted);
+}
+
+.site-footer .footer-social:hover {
+  border-color: rgba(74, 222, 128, 0.45);
+  color: var(--brand-400);
+}
+
+/* Four modules hub diagram */
+.modules-diagram-box,
+.modules-diagram-hub {
+  position: relative;
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

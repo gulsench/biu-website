@@ -11,74 +11,67 @@ const socialPaths: Record<string, string> = {
     "M21.6 7.2s-.19-1.36-.78-1.96c-.75-.78-1.58-.79-1.96-.83C16.13 4.2 12 4.2 12 4.2h-.01s-4.12 0-6.85.21c-.38.04-1.21.05-1.96.83-.59.6-.78 1.96-.78 1.96S2.2 8.8 2.2 10.4v1.49c0 1.6.2 3.2.2 3.2s.19 1.36.78 1.96c.75.78 1.74.75 2.18.84 1.58.15 6.64.2 6.64.2s4.13-.01 6.86-.22c.38-.04 1.21-.05 1.96-.83.59-.6.78-1.96.78-1.96s.2-1.6.2-3.2V10.4c0-1.6-.2-3.2-.2-3.2ZM9.9 13.7V8.9l4.3 2.4-4.3 2.4Z",
 };
 
-/** Footer links with real destinations only — null renders as non-clickable text. */
-const footerLinkHrefs: Record<string, string | null> = {
-  Modules: "#modules",
-};
-
-function FooterLink({ label }: { label: string }) {
-  const href = footerLinkHrefs[label] ?? null;
-
-  if (!href) {
-    return (
-      <span className="block cursor-default py-0.5 text-[11px] leading-tight text-[rgba(255,255,255,0.45)]">
-        {label}
-      </span>
-    );
-  }
-
-  return (
-    <a
-      href={href}
-      className="block py-0.5 text-[11px] leading-tight text-[rgba(255,255,255,0.72)] transition-colors hover:text-white"
-    >
-      {label}
-    </a>
-  );
-}
-
 export function Footer() {
-  const legalLinks = footer.legalRight
-    ? footer.legalRight.split(" · ").filter(Boolean)
-    : [];
-
   return (
-    <footer
-      role="contentinfo"
-      className="border-t border-[rgba(255,255,255,0.08)] bg-band text-[rgba(255,255,255,0.7)]"
-    >
-      <div className="mx-auto max-w-container px-6 py-10">
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
-          {/* Brand + contact + social */}
+    <footer role="contentinfo" className="site-footer border-t">
+      <div className="mx-auto max-w-container px-4 py-14 sm:px-6">
+        <div className="footer-newsletter mb-12 grid gap-6 border p-5 sm:grid-cols-2 sm:items-center sm:p-8">
+          <div>
+            <h3 className="text-[20px] font-bold tracking-tight text-white">
+              {footer.newsletter.title}
+            </h3>
+            <p className="mt-1.5 max-w-md text-[13.5px] text-[var(--footer-muted)]">
+              {footer.newsletter.body}
+            </p>
+          </div>
+          <form className="flex flex-col gap-3 sm:flex-row md:justify-end">
+            <input
+              type="email"
+              required
+              placeholder={footer.newsletter.placeholder}
+              aria-label="Email address"
+              className="footer-input w-full border px-4 py-3 text-[14px] outline-none transition-colors sm:max-w-xs"
+            />
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center bg-brand-600 px-6 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-brand-700"
+            >
+              {footer.newsletter.cta}
+            </button>
+          </form>
+        </div>
+
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-10 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
-            <div className="flex items-center gap-2 text-sm font-extrabold text-white">
+            <a href="/" aria-label="BIU home" className="inline-flex items-center gap-2">
               <Image
-                src="/logo-white.png"
+                src="/logo.png"
                 alt="BIU logo"
                 width={262}
                 height={250}
-                className="h-7 w-auto"
+                className="h-7 w-auto brightness-0 invert"
               />
-            </div>
-            <p className="mt-2 max-w-[240px] text-[11px] leading-snug text-[rgba(255,255,255,0.45)]">
+            </a>
+            <p className="mt-3 max-w-[240px] text-[12px] leading-snug text-[var(--footer-muted)]">
               {footer.tagline}
             </p>
             <a
               href={`mailto:${footer.email}`}
-              className="mt-3 inline-block text-[11px] font-medium text-[rgba(255,255,255,0.7)] transition-colors hover:text-white"
+              className="mt-3 inline-block text-[12px] font-medium text-[var(--footer-text)] transition-colors"
             >
               {footer.email}
             </a>
             <div className="mt-4 flex items-center gap-2">
               {footer.social.map((s) => (
-                <span
+                <a
                   key={s.label}
+                  href="#"
                   aria-label={s.label}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(255,255,255,0.12)] text-[rgba(255,255,255,0.35)] opacity-40"
+                  className="footer-social flex h-9 w-9 items-center justify-center border transition-colors"
                 >
                   <svg
-                    width="15"
-                    height="15"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     aria-hidden
@@ -89,20 +82,25 @@ export function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </span>
+                </a>
               ))}
             </div>
           </div>
 
           {footer.columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
-              <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.1em] text-[rgba(255,255,255,0.4)]">
+              <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--footer-muted)]">
                 {col.title}
               </p>
               <ul>
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <FooterLink label={link} />
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="block py-0.5 text-[12px] leading-tight text-[var(--footer-text)] transition-colors"
+                    >
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -110,26 +108,25 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-col justify-between gap-2 border-t border-[rgba(255,255,255,0.1)] pt-4 text-[10px] text-[rgba(255,255,255,0.4)] sm:flex-row sm:items-center">
+        <div className="mt-10 flex flex-col justify-between gap-2 border-t border-[var(--footer-border)] pt-5 text-[11px] text-[var(--footer-muted)] sm:flex-row sm:items-center">
           <span>
             © 2026 Boast It UP ·{" "}
-            <a
-              href="https://boastitup.com"
-              className="transition-colors hover:text-[rgba(255,255,255,0.75)]"
-            >
+            <a href="https://boastitup.com" className="transition-colors">
               boastitup.com
             </a>
           </span>
-          {legalLinks.length > 0 && (
+          {footer.legal.length > 0 && (
             <span className="flex flex-wrap items-center">
-              {legalLinks.map((link, i) => (
-                <span key={link} className="inline-flex items-center">
+              {footer.legal.map((link, i) => (
+                <span key={link.label} className="inline-flex items-center">
                   {i > 0 && (
-                    <span aria-hidden className="px-1">
+                    <span aria-hidden className="px-1.5">
                       ·
                     </span>
                   )}
-                  <span className="text-[rgba(255,255,255,0.45)]">{link}</span>
+                  <a href={link.href} className="transition-colors">
+                    {link.label}
+                  </a>
                 </span>
               ))}
             </span>

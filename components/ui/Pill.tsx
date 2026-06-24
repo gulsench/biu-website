@@ -23,14 +23,14 @@ export function Pill({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[11px] font-bold",
+        "inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold",
         className
       )}
       style={{ color: textColor, background: bgColor }}
     >
       {dot && (
         <span
-          className="h-1.5 w-1.5 rounded-full"
+          className="h-1.5 w-1.5"
           style={{ background: dotColor ?? "currentColor" }}
         />
       )}

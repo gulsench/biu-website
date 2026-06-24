@@ -7,14 +7,29 @@ const config: Config = {
     "./lib/**/*.{ts,tsx}",
   ],
   theme: {
+    borderRadius: {
+      none: "0",
+      sm: "0",
+      DEFAULT: "0",
+      md: "0",
+      lg: "0",
+      xl: "0",
+      "2xl": "0",
+      "3xl": "0",
+      full: "0",
+      card: "0",
+      chip: "0",
+      pill: "0",
+    },
     extend: {
       colors: {
         brand: {
-          900: "var(--brand-900)",
-          700: "var(--brand-700)",
-          600: "var(--brand-600)",
-          500: "var(--brand-500)",
-          400: "var(--brand-400)",
+          900: "rgb(var(--brand-900-rgb) / <alpha-value>)",
+          700: "rgb(var(--brand-700-rgb) / <alpha-value>)",
+          600: "rgb(var(--brand-600-rgb) / <alpha-value>)",
+          500: "rgb(var(--brand-500-rgb) / <alpha-value>)",
+          400: "rgb(var(--brand-400-rgb) / <alpha-value>)",
+          accent: "rgb(var(--brand-accent-rgb) / <alpha-value>)",
           glow: "var(--brand-glow)",
         },
         ink: "var(--ink)",
@@ -26,6 +41,7 @@ const config: Config = {
         surfacealt: "var(--surface-alt)",
         card: "var(--card)",
         "card-inner": "var(--card-inner)",
+        "card-border": "var(--card-border)",
         band: "var(--band)",
         white: "rgb(255 255 255 / <alpha-value>)",
         up: "var(--up)",
@@ -39,14 +55,9 @@ const config: Config = {
       maxWidth: {
         container: "1200px",
       },
-      borderRadius: {
-        card: "16px",
-        chip: "8px",
-        pill: "999px",
-      },
       boxShadow: {
-        soft: "0 1px 2px rgba(0,0,0,.35), 0 8px 30px rgba(0,0,0,.45)",
-        lift: "0 2px 4px rgba(0,0,0,.4), 0 18px 50px rgba(0,0,0,.55)",
+        soft: "0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04)",
+        lift: "0 2px 8px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.06)",
       },
       letterSpacing: {
         eyebrow: "0.12em",
