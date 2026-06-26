@@ -92,7 +92,7 @@ export function Nav() {
   return (
     <header
       data-mobile-nav
-      className="border-b border-border bg-white"
+      className="border-b border-border bg-card"
     >
       <nav
         aria-label="Primary"
@@ -202,7 +202,7 @@ export function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={reduce ? undefined : { opacity: 0, height: 0 }}
             transition={{ duration: reduce ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-border bg-white lg:hidden"
+            className="overflow-hidden border-t border-border bg-card lg:hidden"
           >
             <div className="mx-auto max-w-container px-4 py-4 sm:px-6">
               <ul className="space-y-1">

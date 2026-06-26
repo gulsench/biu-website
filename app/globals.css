@@ -43,53 +43,53 @@
 :root {
   --site-nav-height: 4rem;
   --site-chrome-height: var(--site-nav-height);
-  /* Brand green — tuned for light canvas.
+  /* Brand green — tuned for dark canvas.
    *-rgb channel vars power Tailwind alpha modifiers (bg-brand-600/40);
    hex vars remain for direct var() usage in inline styles/SVG. */
-  --brand-900-rgb: 220 252 231;
-  --brand-700-rgb: 21 128 61;
-  --brand-600-rgb: 22 163 74;
-  --brand-500-rgb: 34 197 94;
-  --brand-400-rgb: 74 222 128;
-  --brand-accent-rgb: 22 163 74;
+  --brand-900-rgb: 167 243 208;
+  --brand-700-rgb: 52 210 123;
+  --brand-600-rgb: 54 189 131;
+  --brand-500-rgb: 74 222 128;
+  --brand-400-rgb: 110 231 168;
+  --brand-accent-rgb: 54 189 131;
 
-  --brand-900: #dcfce7;
-  --brand-700: #15803d;
-  --brand-600: #16a34a;
-  --brand-500: #22c55e;
-  --brand-400: #4ade80;
-  --brand-glow: #f0fdf4;
-  --brand-accent: #16a34a;
-  --color-green-text: #16a34a;
+  --brand-900: #a7f3d0;
+  --brand-700: #34d27b;
+  --brand-600: #36bd83;
+  --brand-500: #4ade80;
+  --brand-400: #6ee7a8;
+  --brand-glow: #0f1613;
+  --brand-accent: #36bd83;
+  --color-green-text: #4ade80;
 
-  /* Neutrals — warm light canvas */
-  --ink: #1a1a1a;
-  --mid: #525252;
-  --muted: #737373;
-  --border: rgba(26, 26, 26, 0.12);
-  --section-border-outer: rgba(26, 26, 26, 0.1);
+  /* Neutrals — dark canvas */
+  --ink: #ffffff;
+  --mid: rgba(255, 255, 255, 0.72);
+  --muted: rgba(255, 255, 255, 0.45);
+  --border: rgba(255, 255, 255, 0.1);
+  --section-border-outer: rgba(255, 255, 255, 0.1);
   --section-border-inner: transparent;
   --section-border-gap: 3px;
-  --surface: #fafafa;
-  --surface-alt: #f5f5f5;
-  --card: #ffffff;
-  --card-inner: #f9fafb;
-  --card-border: rgba(26, 26, 26, 0.12);
-  --card-highlight-border: rgba(22, 163, 74, 0.35);
-  --band: #ffffff;
+  --surface: #0f1211;
+  --surface-alt: #141817;
+  --card: #1a201e;
+  --card-inner: #222928;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-highlight-border: rgba(54, 189, 131, 0.45);
+  --band: #0f1211;
 
-  /* Dark footer — matches Request Demo / module-cta button */
-  --footer-bg: #2d2d2d;
-  --footer-bg-elevated: #363636;
+  /* Dark footer */
+  --footer-bg: #0a0c0b;
+  --footer-bg-elevated: #121412;
   --footer-border: rgba(255, 255, 255, 0.12);
   --footer-text: rgba(255, 255, 255, 0.78);
   --footer-muted: rgba(255, 255, 255, 0.52);
   --white: #ffffff;
 
   /* Signal colors */
-  --up: #16a34a;
-  --down: #15803d;
-  --warn: #22c55e;
+  --up: #4ade80;
+  --down: #36bd83;
+  --warn: #6ee7a8;
 }
 
 * {
@@ -100,7 +100,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: dark;
   overflow-x: hidden;
 }
 
@@ -368,7 +368,7 @@ a {
 }
 
 .module-preview-panel {
-  background: #d8ebe3;
+  background: #141f19;
   border-radius: 0;
 }
 .module-nav-item {
@@ -376,21 +376,21 @@ a {
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 .module-nav-item[data-active="true"] {
-  background: #e8f4ef;
+  background: rgba(54, 189, 131, 0.14);
 }
 .module-card {
-  background: #fff;
+  background: var(--card-inner);
   border-radius: 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 .module-cta {
   border-radius: 0;
-  background: #2d2d2d;
+  background: var(--brand-600);
   color: #fff;
   transition: background-color 0.15s ease;
 }
 .module-cta:hover {
-  background: #1a1a1a;
+  background: var(--brand-700);
 }
 .module-chip {
   border-radius: 0;

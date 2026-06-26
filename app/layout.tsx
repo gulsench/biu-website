@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fafafa",
+  themeColor: "#0f1211",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={jakartaSans.variable}>
-      <body className="min-h-screen overflow-x-hidden bg-surface font-sans antialiased">
+      <body className="min-h-screen overflow-x-hidden bg-band font-sans antialiased">
         {children}
       </body>
     </html>

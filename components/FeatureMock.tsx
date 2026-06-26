@@ -1365,7 +1365,7 @@ function ContentMock({ modulePreview }: { modulePreview?: boolean }) {
           {["Concise", "Scenario-based", "Quiz-ready"].map((tag) => (
             <span
               key={tag}
-              className="module-pill border border-border bg-white px-3 py-1 text-[11px] font-normal text-mid"
+              className="module-pill border border-border bg-card-inner px-3 py-1 text-[11px] font-normal text-mid"
             >
               {tag}
             </span>
@@ -1436,11 +1436,11 @@ function VideoMock({ modulePreview }: { modulePreview?: boolean }) {
         </div>
         <p className="mt-5 text-[12px] font-semibold text-ink">Voice and Language</p>
         <div className="mt-2 space-y-2">
-          <div className="module-chip flex items-center justify-between border border-border bg-white px-3 py-2.5 text-[12px]">
+          <div className="module-chip flex items-center justify-between border border-border bg-card-inner px-3 py-2.5 text-[12px]">
             <span>🇮🇳 English (India)</span>
             <span className="text-muted">▾</span>
           </div>
-          <div className="module-chip flex items-center justify-between border border-border bg-white px-3 py-2.5 text-[12px]">
+          <div className="module-chip flex items-center justify-between border border-border bg-card-inner px-3 py-2.5 text-[12px]">
             <span>🔊 Sushant (English IND)</span>
             <span className="text-muted">▾</span>
           </div>
@@ -1448,7 +1448,7 @@ function VideoMock({ modulePreview }: { modulePreview?: boolean }) {
         <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
           <span className="text-[12px] font-normal text-ink">Auto-generate Captions</span>
           <span className="module-pill relative h-6 w-11 bg-ink" aria-hidden>
-            <span className="absolute right-0.5 top-0.5 h-5 w-5 bg-white" />
+            <span className="absolute right-0.5 top-0.5 h-5 w-5 bg-card-inner" />
           </span>
         </div>
       </div>
@@ -1493,7 +1493,7 @@ function RoleplayMock({ modulePreview }: { modulePreview?: boolean }) {
             </div>
           ))}
         </div>
-        <div className="module-chip mt-4 flex items-center gap-2 border border-border bg-white px-4 py-3">
+        <div className="module-chip mt-4 flex items-center gap-2 border border-border bg-card-inner px-4 py-3">
           <span className="text-[13px] text-muted">Type your response…</span>
         </div>
       </div>

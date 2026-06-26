@@ -92,7 +92,7 @@ export function Button({
       <button
         type={type}
         className={cn(
-          "inline-flex items-center justify-center border border-border bg-white font-semibold text-ink",
+          "inline-flex items-center justify-center border border-border bg-card font-semibold text-ink",
           "transition-all duration-150 hover:border-brand-600/30 hover:bg-surfacealt active:translate-y-px",
           "disabled:cursor-not-allowed disabled:opacity-60",
           sizes[size],

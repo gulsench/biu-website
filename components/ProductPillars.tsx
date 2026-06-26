@@ -30,14 +30,16 @@ export function ProductPillars() {
     <section id="modules" className="relative overflow-hidden section-edge-b bg-surface">
       <SectionBackground tone="surface" />
       <div className="section-wrap relative z-10">
-        <h2 className="h2-display mb-8 max-w-2xl text-ink md:mb-12">{pillarsCategory.title}</h2>
+        <h2 className="h2-display mx-auto mb-8 max-w-2xl text-center text-ink md:mb-12">
+          {pillarsCategory.title}
+        </h2>
 
         {/* Module selector */}
-        <div className="mb-10 md:mb-12">
+        <div className="mb-10 flex justify-center md:mb-12">
           <div
             role="tablist"
             aria-label="Product modules"
-            className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap"
+            className="grid max-w-xl grid-cols-2 justify-items-center gap-2 sm:flex sm:flex-wrap sm:justify-center"
           >
             {productModules.map((mod, i) => {
               const selected = i === activeModule;

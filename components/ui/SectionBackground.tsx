@@ -7,16 +7,16 @@ const toneStyles: Record<
   { orbA: string; orbB: string; wash?: string }
 > = {
   surface: {
-    orbA: "bg-[radial-gradient(circle,rgba(34,197,94,0.13)_0%,transparent_68%)]",
-    orbB: "bg-[radial-gradient(circle,rgba(22,163,74,0.07)_0%,transparent_72%)]",
+    orbA: "bg-[radial-gradient(circle,rgba(74,222,128,0.12)_0%,transparent_68%)]",
+    orbB: "bg-[radial-gradient(circle,rgba(54,189,131,0.06)_0%,transparent_72%)]",
     wash:
-      "bg-[linear-gradient(165deg,rgba(240,253,244,0.45)_0%,transparent_42%,rgba(250,250,250,0.6)_100%)]",
+      "bg-[linear-gradient(165deg,rgba(15,22,19,0.4)_0%,transparent_42%,rgba(15,18,17,0.85)_100%)]",
   },
   band: {
-    orbA: "bg-[radial-gradient(circle,rgba(34,197,94,0.09)_0%,transparent_70%)]",
-    orbB: "bg-[radial-gradient(circle,rgba(245,245,245,0.9)_0%,transparent_72%)]",
+    orbA: "bg-[radial-gradient(circle,rgba(74,222,128,0.08)_0%,transparent_70%)]",
+    orbB: "bg-[radial-gradient(circle,rgba(20,24,23,0.9)_0%,transparent_72%)]",
     wash:
-      "bg-[linear-gradient(120deg,transparent_0%,rgba(240,253,244,0.35)_55%,transparent_100%)]",
+      "bg-[linear-gradient(120deg,transparent_0%,rgba(54,189,131,0.06)_55%,transparent_100%)]",
   },
   accent: {
     orbA: "bg-[radial-gradient(circle,rgba(255,255,255,0.14)_0%,transparent_68%)]",

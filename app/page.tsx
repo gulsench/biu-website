@@ -7,7 +7,6 @@ import { Roadmap } from "@/components/Roadmap";
 import { Copilot } from "@/components/Copilot";
 import { Integrations } from "@/components/Integrations";
 import { CaseStudies } from "@/components/CaseStudies";
-import { FAQ } from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
         <Integrations />
         <CaseStudies />
         <Roadmap />
-        <FAQ />
       </main>
     </SiteShell>
   );

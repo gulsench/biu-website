@@ -29,6 +29,7 @@ export const navLinks: NavItem[] = [
     children: [
       { label: "Blogs", href: "/blog" },
       { label: "Customer Stories", href: "/customer-stories" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
   { label: "About Us", href: "/about" },
@@ -355,7 +356,7 @@ export const footer = {
       links: [
         { label: "Blog", href: "/blog" },
         { label: "Customer Stories", href: "/customer-stories" },
-        { label: "FAQ", href: "/#faq" },
+        { label: "FAQ", href: "/faq" },
       ] satisfies FooterLinkItem[],
     },
     {

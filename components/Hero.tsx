@@ -12,7 +12,7 @@ export function Hero() {
         {/* Copy */}
         <Reveal stagger className="mx-auto max-w-4xl">
           <RevealItem>
-            <span className="inline-flex items-center gap-2 border border-border bg-white px-4 py-2">
+            <span className="inline-flex items-center gap-2 border border-border bg-card px-4 py-2">
               <span className="h-1.5 w-1.5 bg-brand-600" />
               <span className="eyebrow-text text-muted">{hero.eyebrow}</span>
             </span>

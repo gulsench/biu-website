@@ -21,7 +21,7 @@ const gradientStyles: Record<GradientVariant, CSSProperties> = {
   },
   brand: {
     backgroundImage:
-      "radial-gradient(125% 125% at 50% 10%, #ffffff 58%, #dcfce7 100%)",
+      "radial-gradient(125% 125% at 50% 10%, #1a201e 35%, #0f1211 58%, #141f19 100%)",
     backgroundSize: "100% 100%",
   },
 };
