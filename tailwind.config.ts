@@ -1,70 +1,70 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./lib/**/*.{ts,tsx}",
-  ],
+export default {
+  darkMode: ["class"],
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  prefix: "",
   theme: {
-    borderRadius: {
-      none: "0",
-      sm: "0",
-      DEFAULT: "0",
-      md: "0",
-      lg: "0",
-      xl: "0",
-      "2xl": "0",
-      "3xl": "0",
-      full: "0",
-      card: "0",
-      chip: "0",
-      pill: "0",
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1232px",
+      },
     },
     extend: {
-      colors: {
-        brand: {
-          900: "rgb(var(--brand-900-rgb) / <alpha-value>)",
-          700: "rgb(var(--brand-700-rgb) / <alpha-value>)",
-          600: "rgb(var(--brand-600-rgb) / <alpha-value>)",
-          500: "rgb(var(--brand-500-rgb) / <alpha-value>)",
-          400: "rgb(var(--brand-400-rgb) / <alpha-value>)",
-          accent: "rgb(var(--brand-accent-rgb) / <alpha-value>)",
-          glow: "var(--brand-glow)",
-        },
-        ink: "var(--ink)",
-        mid: "var(--mid)",
-        muted: "var(--muted)",
-        "green-text": "var(--color-green-text)",
-        border: "var(--border)",
-        surface: "var(--surface)",
-        surfacealt: "var(--surface-alt)",
-        card: "var(--card)",
-        "card-inner": "var(--card-inner)",
-        "card-border": "var(--card-border)",
-        band: "var(--band)",
-        white: "rgb(255 255 255 / <alpha-value>)",
-        up: "var(--up)",
-        down: "var(--down)",
-        warn: "var(--warn)",
-      },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-sans)", "system-ui", "sans-serif"],
+        heading: ["Space Grotesk", "sans-serif"],
+        body: ["DM Sans", "sans-serif"],
+        mono: ["DM Mono", "monospace"],
       },
-      maxWidth: {
-        container: "1200px",
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        blue: "hsl(var(--color-blue))",
+        "color-bg": "var(--color-bg)",
+        "color-bg-alt": "var(--color-bg-alt)",
+        "color-paper": "var(--color-paper)",
+        "color-surface": "var(--color-surface)",
+        "color-blue-tint": "var(--color-blue-tint)",
+        "color-blue-paper": "var(--color-blue-paper)",
+        "color-text": "var(--color-text)",
+        "color-text-muted": "var(--color-text-muted)",
+        "color-text-dim": "var(--color-text-dim)",
+        "color-blue": "var(--color-blue-light)",
+        "color-border": "var(--color-border)",
+        "color-border-light": "var(--color-border-light)",
+        "color-border-dashed": "var(--color-border-dashed)",
+        "color-card-blue": "var(--color-card-blue)",
       },
-      boxShadow: {
-        soft: "0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04)",
-        lift: "0 2px 8px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.06)",
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
-      letterSpacing: {
-        eyebrow: "0.12em",
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "hero-ticker-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "hero-ticker-scroll": "hero-ticker-scroll 36s linear infinite",
       },
     },
   },
-  plugins: [],
-};
-
-export default config;
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config;
