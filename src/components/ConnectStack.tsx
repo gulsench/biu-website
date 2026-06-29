@@ -53,11 +53,13 @@ export function ConnectStack() {
             already lives — no rip-and-replace, no new workflow to learn.
           </p>
         </Reveal>
+      </div>
 
-        <Reveal delay={0.06}>
-          <LogoTicker items={stackIntegrations} />
-        </Reveal>
+      <Reveal delay={0.06} className="mt-2 w-full">
+        <LogoTicker items={stackIntegrations} />
+      </Reveal>
 
+      <div className="section-container">
         <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 sm:gap-4">
           {stackGroups.map((group, index) => (
             <Reveal key={group.label} delay={0.08 + index * 0.04} y={12}>
